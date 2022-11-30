@@ -1,0 +1,86 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Physio-App</title>
+    <link rel="stylesheet" href="./createdstyle.css" />
+</head>
+
+<body>
+    <div class="w-screen h-screen flex flex-row">
+        <div class="w-1/2 h-screen main">
+        </div>
+        <div class="w-1/2 h-screen flex flex-row justify-center items-center">
+            <div class="w-4/6 h-4/6 flex flex-col justify-center">
+                {{#if messages.error}}
+                <p class="error text-center text-red-600">{{messages.error}}</p>
+                {{/if}}
+                {{#if messages.success}}
+                <p class="success text-center text-green-600">{{messages.success}}</p>
+                {{/if}}
+                <form action="/signup" method="post" class="flex flex-col items-center">
+                   <h1 class="text-3xl">Sign up</h1>
+                   <p class="text-sm mt-2">Already have an account?<span class="text-blue-400"> Sign in here</span></p>
+                    <div class="flex flex-row w-5/6 gap-x-6 mt-7 ">
+                        {{! firstname }}
+                        <div class="flex flex-col">
+                            <label for="firstname">First Name</label>
+                            <input type="text" name="firstname" id="firstname" placeholder="First Name"
+                                class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" required/>
+                        </div>
+                        {{! lastname }}
+                        <div class="flex flex-col">
+                            <label for="lastname">Last Name</label>
+                            <input type="text" name="lastname" id="lastname" placeholder="Last Name"
+                                class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" required/>
+                        </div>
+                    </div>
+                    <div class="flex flex-row w-5/6 gap-x-6">
+                        {{! username }}
+                        <div class="flex flex-col">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" placeholder="Username"
+                                class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" required/>
+                        </div>
+                        {{! age }}
+                        <div class="flex flex-col">
+                            <label for="age">Age</label>
+                            <input type="text" name="age" id="age" placeholder="Age"
+                                class="appearance-none block w-3/6 bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" required/>
+                        </div>
+                    </div>
+                    <div class="flex flex-row self-start gap-x-4">
+                        <button type="submit"
+                            class="ml-10  bg-[#5D8CB9] w-20 h-10 rounded-md text-white text-sm hover:bg-transparent hover:border-[#5D8CB9] hover:border-2 hover:text-[#5D8CB9]">REGISTER</button>
+                        <a href="/signin"
+                            class="bg-[#5D8CB9] w-20 h-10 rounded-md text-white text-sm hover:bg-transparent hover:border-[#5D8CB9] hover:border-2 hover:text-[#5D8CB9] text-center pt-2">LOGIN
+                        </a>
+                    </div>
+                </form>
+                {{#if messages.theId}}
+                    <p class="theId text-center text-blue-700">Here Is Your Unique Code Pls Save
+                        It And Use It To Login
+                        <span style="font-size: 40px;text-decoration: underline">{{messages.theId}}</span>
+                    </p>
+                {{/if}}
+            </div>
+            <!--login button-->
+
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+</body>
+<style>
+    .main {
+        background-image: url(./pic1.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+</html>
