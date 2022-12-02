@@ -24,7 +24,7 @@
     <div class="w-1/2 h-screen flex flex-col items-center justify-center">
         <div class="border-2 border-red-600 w-4/6 h-5/6 flex flex-col justify-center items-center">
             <div>
-                <canvas id="canvas" class="w-full visible"></canvas>
+                <canvas id="canvas" class="w-full"></canvas>
             </div>
             <div id="label-container" class="flex flex-col justify-center items-center mt-6">
 
@@ -32,19 +32,17 @@
             <p class="text-gray-500 text-center">In Order to complete the game, you have to atleast get 1 point in each exercise</p>
             <div class="flex flex-row justify-center items-center mt-2 border-2 border-gray-400 rounded-md px-2">
                 <p class="text-gray-500">Superman: </p>
-                <p id="supermanCounter" class="text-gray-500 ml-2">0</p>
+                <p id="supermanCounter" class="text-green-600 ml-2">0</p>
             </div>
             <div class="flex flex-row justify-center items-center mt-2 border-2 border-gray-400 rounded-md px-2">
                 <p class="text-gray-500">Hip Flexor: </p>
-                <p id="flexorCounter" class="text-gray-500 ml-2">0</p>
+                <p id="flexorCounter" class="text-green-600 ml-2">0</p>
             </div>
             <div class="flex flex-row justify-center items-center mt-2 border-2 border-gray-400 rounded-md px-2">
                 <p class="text-gray-500">Prayer: </p>
-                <p id="prayerCounter" class="text-gray-500 ml-2">0</p>
+                <p id="prayerCounter" class="text-green-600 ml-2">0</p>
             </div>
             <button type="button" onClick="init()" class="hover:text-red-600 hover:border-2 hover:border-red-600 mt-2 px-6 rounded-md text-xl text-white bg-red-400 hover:bg-white visible" id="startButton">Start</button>
-<!--            stop button-->
-            <button type="button" onClick="stop()" class="hover:text-red-600 hover:border-2 hover:border-red-600 mt-2 px-6 rounded-md text-xl text-white bg-red-400 hover:bg-white hidden" id="stopButton">Stop</button>
         </div>
     </div>
 
@@ -114,7 +112,7 @@
 <!--                                points-->
                                 <div class="flex flex-col justify-center items-center">
                                     <h1 class="text-center text-2xl mt-6 tracking-wide font-bold">Points</h1>
-                                    <p class="text-center text-sm mt-1 tracking-wide">You have earned <span class="text-green-500">9</span> points</p>
+                                    <p class="text-center text-sm mt-1 tracking-wide">You have earned <span class="text-green-500 text-4xl" id="theSpan">0</span> points</p>
                                 </div>
                             </div>
                         </div>
@@ -138,9 +136,8 @@
     let prayer = document.getElementsByClassName("prayer")[0];
     let next = document.getElementsByClassName('swiper-button-next');
     let prev = document.getElementsByClassName('swiper-button-prev');
-    let supermanCounter = 0;
-    let flexorCounter = 0;
-    let prayerCounter = 0;
+
+   
 
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
@@ -176,115 +173,70 @@
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
         }
-        theStartButton.classList.remove('visible');
+        {{!-- theStartButton.classList.remove('visible');
         theStartButton.classList.add('hidden');
         theStopButton.classList.remove("hidden");
-        theStopButton.classList.add("visible");
+        theStopButton.classList.add("visible"); --}}
     }
 
     async function loop(timestamp) {
         webcam.update(); // update the webcam frame
         await predict();
-        setTimeout(() => {
-            window.requestAnimationFrame(loop);
-        }, 100);
+        window.requestAnimationFrame(loop);
     }
-    let theCloseModal = document.getElementsByClassName('closeModal')[0];
-
-   function theToogle() {
-            let theModal = document.getElementsByClassName('myModal')[0];
-            let seeResults = document.getElementById('seeResults');
-            theModal.classList.remove("hidden");
-            theModal.classList.add("visible");
-            seeResults.classList.add("hidden");
-    }
-    function theClose() {
-        let theModal = document.getElementsByClassName('myModal')[0];
-        let seeResults = document.getElementById('seeResults');
-        theModal.classList.remove("visible");
-        theModal.classList.add('hidden');
-        seeResults.classList.remove('hidden');
-        seeResults.classList.add('visible');
-    }
-    function stop() {
-       let theCanvas = document.getElementById('canvas');
-         theStartButton.classList.remove('hidden');
-            theStartButton.classList.add('visible');
-            theStopButton.classList.remove("visible");
-            theStopButton.classList.add("hidden");
-        webcam.stop();
-theCanvas.classList.remove('visible');
-        theCanvas.classList.add('hidden');
-    }
+ 
     async function predict() {
+         let supermanCounter = 0;
+         let flexorCounter = 0;
+        let prayerCounter = 0;
         // Prediction #1: run input through posenet
         // estimatePose can take in an image, video or canvas html element
         const {pose, posenetOutput} = await model.estimatePose(webcam.canvas);
         // Prediction 2: run input through teachable machine classification model
         const prediction = await model.predict(posenetOutput);
         let theSuper = prediction[0].probability.toFixed(2);
+        {{!-- console.log(theSuper); --}}
         let theFlexor = prediction[1].probability.toFixed(2);
         let thePrayer = prediction[2].probability.toFixed(2);
-        let count1 = document.getElementsByClassName('supermanCounter')[0];
-        let count2 = document.getElementsByClassName('flexorCounter')[0];
-        let count3 = document.getElementsByClassName('prayerCounter')[0];
-        let countSuper = 0;
-        let countFlexor = 0;
-        let countPrayer = 0;
-        if (countSuper < 2) {
-        if (theSuper > 0.95) {
-            supermanCounter++;
-            superman.innerText = supermanCounter;
-            if (supermanCounter > 50) {
-                //add class to superman
-                superman.classList.add('bg-green-500');
-                setTimeout(() => {
-                    next[0].click();
-                }, 3000);
-                supermanCounter = 0;
-                countSuper += 2;
-                count1.innerText = countSuper;
-                return;
-            }
-        }
-       }
-      if(countFlexor < 2) {
-          if (theFlexor > 0.95) {
-              flexorCounter++;
-              flexor.innerText = flexorCounter;
-          }
-            if (flexorCounter > 50) {
-                setTimeout(() => {
-                    next[0].click();
-                }, 3000);
-                flexorCounter = 0;
-                countFlexor += 3;
-                count2.innerText = countFlexor;
-                return;
-            }
-      }
+        let count1 = document.getElementById('supermanCounter');
+        let count2 = document.getElementById('flexorCounter');
+        let count3 = document.getElementById('prayerCounter');
+        let ourSpan = document.getElementById('theSpan');
+        var countSuper = 0;
+        var countFlexor = 0;
+        var countPrayer = 0;
+
+           var theTotal = 0; 
 
 
-        if(countPrayer < 2) {
-            if (thePrayer > 0.95) {
-                prayerCounter++;
-                prayer.innerText = prayerCounter;
-            } if (prayerCounter > 50) {
-                setTimeout(() => {
-                    next[0].click();
-                }, 3000);
-                prayerCounter = 0;
-                countPrayer += 2;
-                count3.innerText = countPrayer;
-                return;
-            }
+        if (theSuper > 0.95) {              
+            countSuper += 2;
+            theTotal += 2;
+            count1.innerHTML = countSuper;    
         }
 
-        for (let i = 0; i < maxPredictions; i++) {
+        if (theFlexor > 0.95) {
+              countFlexor += 3;
+              theTotal += 3;
+              count2.innerHTML =  countFlexor;
+                   
+        }
+        if (thePrayer > 0.95) {
+                countPrayer += 1;
+                theTotal += 1;
+                count3.innerHTML = countPrayer;
+                 
+        }
+       // theTotal = countSuper + countFlexor + countPrayer;
+        console.log(`total`,theTotal);
+        ourSpan.innerHTML = theTotal;
+       
+
+        {{!-- for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerText = classPrediction;
-        }
+        } --}}
 
         // finally draw the poses
         drawPose(pose);
