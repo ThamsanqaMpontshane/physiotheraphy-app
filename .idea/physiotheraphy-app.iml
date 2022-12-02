@@ -8,5 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="@tensorflow/tfjs" level="application" />
+    <orderEntry type="library" name="@teachablemachine/pose" level="application" />
+    <orderEntry type="library" name="swiper" level="application" />
   </component>
 </module>

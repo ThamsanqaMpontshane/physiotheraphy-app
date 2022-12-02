@@ -16,7 +16,7 @@ function physioRoutes(physio,db){
                 req.session.user = user[0].login_code;
                 req.flash('success', 'You have successfully logged in');
                 setTimeout(() => {
-                    res.redirect("back");
+                    res.redirect("/machine");
                 }, 5000);
             } else {
                 req.flash('error', 'Invalid login code');
@@ -45,7 +45,7 @@ function physioRoutes(physio,db){
             req.flash('theId', shortId[0].login_code);
             setTimeout(() => {
                 res.redirect("back");
-            }, 5000);
+            }, 3000);
         }else{
             req.flash('error', 'User already exists');
             res.redirect("/signup");
@@ -54,8 +54,6 @@ function physioRoutes(physio,db){
     async function machineScreen(req,res){
         res.render('machine')
     }
-
-
     return{
         home,
         loginGet,

@@ -3,23 +3,337 @@
 <head>
     <meta charset="UTF-8" />
     <title>Physio-App</title>
-    <link rel="stylesheet" href="./createdstyle.css" />
+    <link rel="stylesheet" href="./createdstyle.css"/>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+
 </head>
 <body>
-<div class="bg-yellow-400 w-screen h-screen flex flex-row">
-    <div class="bg-red-400 w-1/2 h-screen flex flex-row justify-center items-center">
-    <div class="bg-white w-4/6 h-4/6">
+<div class="bg-green-600 w-screen h-screen another flex flex-col justify-center items-center">
+    <img src="./2.svg" class="w-80 h-80">
+<!--    play game button-->
+    <a href="#secondplace" class="animate-bounce">
+        <button class="bg-[#5D8CB9] w-28 h-10 rounded-md text-white text-sm hover:bg-transparent hover:border-[#5D8CB9] hover:border-2 hover:text-[#5D8CB9] mt-10" id="play">Play Game</button>
 
+    </a>
+
+</div>
+<div class="w-screen h-screen flex flex-row" id="secondplace">
+    <div class="w-1/2 h-screen flex flex-col items-center justify-center">
+        <div class="border-2 border-red-600 w-4/6 h-5/6 flex flex-col justify-center items-center">
+            <div>
+                <canvas id="canvas" class="w-full visible"></canvas>
+            </div>
+            <div id="label-container" class="flex flex-col justify-center items-center mt-6">
+
+            </div>
+            <p class="text-gray-500 text-center">In Order to complete the game, you have to atleast get 1 point in each exercise</p>
+            <div class="flex flex-row justify-center items-center mt-2 border-2 border-gray-400 rounded-md px-2">
+                <p class="text-gray-500">Superman: </p>
+                <p id="supermanCounter" class="text-gray-500 ml-2">0</p>
+            </div>
+            <div class="flex flex-row justify-center items-center mt-2 border-2 border-gray-400 rounded-md px-2">
+                <p class="text-gray-500">Hip Flexor: </p>
+                <p id="flexorCounter" class="text-gray-500 ml-2">0</p>
+            </div>
+            <div class="flex flex-row justify-center items-center mt-2 border-2 border-gray-400 rounded-md px-2">
+                <p class="text-gray-500">Prayer: </p>
+                <p id="prayerCounter" class="text-gray-500 ml-2">0</p>
+            </div>
+            <button type="button" onClick="init()" class="hover:text-red-600 hover:border-2 hover:border-red-600 mt-2 px-6 rounded-md text-xl text-white bg-red-400 hover:bg-white visible" id="startButton">Start</button>
+<!--            stop button-->
+            <button type="button" onClick="stop()" class="hover:text-red-600 hover:border-2 hover:border-red-600 mt-2 px-6 rounded-md text-xl text-white bg-red-400 hover:bg-white hidden" id="stopButton">Stop</button>
+        </div>
     </div>
-    </div>
 
 
-    <div class="bg-green-500 w-1/2 h-screen flex flex-row justify-center items-center">
-      <div class="bg-white w-5/6 h-5/6 flex flex-col">
-          <h1 class="text-center text-3xl">ARM ACROSS BODY</h1>
-          <img src="./armacrossbody.jpg" alt="Arm Across Bod" class="w-4/6 h-1/2 border-2 border-black">
+    <div class="w-1/2 h-screen flex flex-row justify-center items-center">
+      <div class="bg-white w-5/6 h-5/6 flex flex-col items-center swiper">
+          <div class="swiper-wrapper">
+              <div class="swiper-slide flex flex-col justify-center items-center">
+
+                  <h1 class="text-center text-2xl mt-1 tracking-widest">Superman</h1>
+                  <img src="./superman.png" alt="Arm Across Bod" class="w-4/6 h-1/2 border-2 border-black mt-6">
+                  <!--          the cues-->
+                  <div>
+                      <h1 class="text-center text-2xl mt-6 tracking-widest">CUES</h1>
+                      <p class="text-center text-sm mt-1 tracking-wide">1. Stand up straight</p>
+                      <p class="text-center text-sm mt-1 tracking-wide">2. Reach out your stronger arm diagonal</p>
+                      <p class="text-center text-sm mt-1 tracking-wide">3. Try doing it with another arm</p>
+                  </div>
+              </div>
+                <div class="swiper-slide flex flex-col justify-center items-center">
+                    <h1 class="text-center text-2xl mt-1 tracking-wide</div>">Standing suspended Hip Flexor
+                    </h1>
+                    <img src="./hipflexor.jpeg" alt="Arm Across Bod" class="w-4/6 h-1/2 border-2 border-black mt-6">
+                    <!--          the cues-->
+                    <div>
+                        <h1 class="text-center text-2xl mt-6 tracking-widest">CUES</h1>
+                        <p class="text-center text-sm mt-1 tracking-wide">1. Back leg behind as far as possible</p>
+                        <p class="text-center text-sm mt-1 tracking-wide">2. Lower hips to floor and try to straighten back leg
+                        </p>
+                        <p class="text-center text-sm mt-1 tracking-wide">3. Keep your front leg bent at 90 degrees</p>
+                    </div>
+                </div>
+                <div class="swiper-slide flex flex-col justify-center items-center">
+                    <h1 class="text-center text-2xl mt-1 tracking-wide">The Prayer
+                    </h1>
+                    <img src="./prayer.jpeg" alt="Arm Across Bod" class="w-4/6 h-1/2 border-2 border-black mt-6">
+                    <!--          the cues-->
+                    <div>
+                        <h1 class="text-center text-2xl mt-6 tracking-widest">CUES</h1>
+                        <p class="text-center text-sm mt-1 tracking-wide">1. Stand up straight</p>
+                        <p class="text-center text-sm mt-1 tracking-wide">2. Stretch your arms out in front of you</p>
+                        </p>
+                        <p class="text-center text-sm mt-1 tracking-wide">3. Try moving them to the side and form a cross</p>
+                    </div>
+                </div>
+<!--              see results-->
+                <div class="swiper-slide flex flex-col justify-center items-center">
+                    <div class="">
+<!--                        see results button-->
+<!--                        this button opens a success modal-->
+<!--<button class="bg-[#5D8CB9] w-28 h-10 rounded-md text-white text-sm hover:bg-transparent hover:border-[#5D8CB9] hover:border-2 hover:text-[#5D8CB9] mt-10" id="seeResults" onclick="theToogle()">See Results</button>-->
+<!--                        modal-->
+                        <div class="w-96 h-96 myModal flex flex-col gap-y-20">
+<!--                            x button to hide the modal-->
+
+<!--<button class="bg-yellow-500 w-4 h-4 self-end closeModal" onclick="theClose()">-->
+
+<!--</button>-->
+<!--                            trophy svg-->
+                            <div class="flex flex-col justify-center items-center mt-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 animate-bounce">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+                            </svg>
+<!--                            congrats-->
+                            <h1 class="text-center text-2xl mt-6 tracking-wide font-bold">Congratulations! Thamsanqa</h1>
+                                <p class="text-center text-sm mt-1 tracking-wide">You have completed the session</p>
+<!--                                points-->
+                                <div class="flex flex-col justify-center items-center">
+                                    <h1 class="text-center text-2xl mt-6 tracking-wide font-bold">Points</h1>
+                                    <p class="text-center text-sm mt-1 tracking-wide">You have earned <span class="text-green-500">9</span> points</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+          </div>
+
+          <button class="swiper-button-prev"></button>
+          <button class="swiper-button-next"></button>
+          <button class="swiper-pagination"></button>
       </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+<script type="text/javascript">
+    let superman = document.getElementsByClassName("superman")[0];
+    let flexor = document.getElementsByClassName("flexor")[0];
+    let prayer = document.getElementsByClassName("prayer")[0];
+    let next = document.getElementsByClassName('swiper-button-next');
+    let prev = document.getElementsByClassName('swiper-button-prev');
+    let supermanCounter = 0;
+    let flexorCounter = 0;
+    let prayerCounter = 0;
+
+    // More API functions here:
+    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
+
+    // the link to your model provided by Teachable Machine export panel
+    const URL = "https://teachablemachine.withgoogle.com/models/BlaswM9Co/";
+    let model, webcam, ctx, labelContainer, maxPredictions;
+    let theStartButton = document.getElementById('startButton');
+    let theStopButton = document.getElementById('stopButton');
+    async function init() {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        // load the model and metadata
+        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+        // Note: the pose library adds a tmPose object to your window (window.tmPose)
+        model = await tmPose.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+        // Convenience function to setup a webcam
+        const size = 200;
+        const flip = true; // whether to flip the webcam
+        webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
+        await webcam.setup(); // request access to the webcam
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+
+        // append/get elements to the DOM
+        const canvas = document.getElementById("canvas");
+        canvas.width = size; canvas.height = size;
+        ctx = canvas.getContext("2d");
+        labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < maxPredictions; i++) { // and class labels
+            labelContainer.appendChild(document.createElement("div"));
+        }
+        theStartButton.classList.remove('visible');
+        theStartButton.classList.add('hidden');
+        theStopButton.classList.remove("hidden");
+        theStopButton.classList.add("visible");
+    }
+
+    async function loop(timestamp) {
+        webcam.update(); // update the webcam frame
+        await predict();
+        setTimeout(() => {
+            window.requestAnimationFrame(loop);
+        }, 100);
+    }
+    let theCloseModal = document.getElementsByClassName('closeModal')[0];
+
+   function theToogle() {
+            let theModal = document.getElementsByClassName('myModal')[0];
+            let seeResults = document.getElementById('seeResults');
+            theModal.classList.remove("hidden");
+            theModal.classList.add("visible");
+            seeResults.classList.add("hidden");
+    }
+    function theClose() {
+        let theModal = document.getElementsByClassName('myModal')[0];
+        let seeResults = document.getElementById('seeResults');
+        theModal.classList.remove("visible");
+        theModal.classList.add('hidden');
+        seeResults.classList.remove('hidden');
+        seeResults.classList.add('visible');
+    }
+    function stop() {
+       let theCanvas = document.getElementById('canvas');
+         theStartButton.classList.remove('hidden');
+            theStartButton.classList.add('visible');
+            theStopButton.classList.remove("visible");
+            theStopButton.classList.add("hidden");
+        webcam.stop();
+theCanvas.classList.remove('visible');
+        theCanvas.classList.add('hidden');
+    }
+    async function predict() {
+        // Prediction #1: run input through posenet
+        // estimatePose can take in an image, video or canvas html element
+        const {pose, posenetOutput} = await model.estimatePose(webcam.canvas);
+        // Prediction 2: run input through teachable machine classification model
+        const prediction = await model.predict(posenetOutput);
+        let theSuper = prediction[0].probability.toFixed(2);
+        let theFlexor = prediction[1].probability.toFixed(2);
+        let thePrayer = prediction[2].probability.toFixed(2);
+        let count1 = document.getElementsByClassName('supermanCounter')[0];
+        let count2 = document.getElementsByClassName('flexorCounter')[0];
+        let count3 = document.getElementsByClassName('prayerCounter')[0];
+        let countSuper = 0;
+        let countFlexor = 0;
+        let countPrayer = 0;
+        if (countSuper < 2) {
+        if (theSuper > 0.95) {
+            supermanCounter++;
+            superman.innerText = supermanCounter;
+            if (supermanCounter > 50) {
+                //add class to superman
+                superman.classList.add('bg-green-500');
+                setTimeout(() => {
+                    next[0].click();
+                }, 3000);
+                supermanCounter = 0;
+                countSuper += 2;
+                count1.innerText = countSuper;
+                return;
+            }
+        }
+       }
+      if(countFlexor < 2) {
+          if (theFlexor > 0.95) {
+              flexorCounter++;
+              flexor.innerText = flexorCounter;
+          }
+            if (flexorCounter > 50) {
+                setTimeout(() => {
+                    next[0].click();
+                }, 3000);
+                flexorCounter = 0;
+                countFlexor += 3;
+                count2.innerText = countFlexor;
+                return;
+            }
+      }
+
+
+        if(countPrayer < 2) {
+            if (thePrayer > 0.95) {
+                prayerCounter++;
+                prayer.innerText = prayerCounter;
+            } if (prayerCounter > 50) {
+                setTimeout(() => {
+                    next[0].click();
+                }, 3000);
+                prayerCounter = 0;
+                countPrayer += 2;
+                count3.innerText = countPrayer;
+                return;
+            }
+        }
+
+        for (let i = 0; i < maxPredictions; i++) {
+            const classPrediction =
+                    prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+            labelContainer.childNodes[i].innerText = classPrediction;
+        }
+
+        // finally draw the poses
+        drawPose(pose);
+    }
+
+    function drawPose(pose) {
+        if (webcam.canvas) {
+            ctx.drawImage(webcam.canvas, 0, 0);
+            // draw the keypoints and skeleton
+            if (pose) {
+                const minPartConfidence = 0.5;
+                tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+                tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+            }
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.swiper', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+
+        // If we need pagination
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+        },
+
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // And if we need scrollbar
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+    });
+</script>
+
 </body>
+<style>
+    .another {
+        background-image: url(./back.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
 </html>
